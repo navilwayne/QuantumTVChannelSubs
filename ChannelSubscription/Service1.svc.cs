@@ -28,7 +28,7 @@ namespace ChannelSubscription
             foreach (VODDetails obj in DAL.GetTargetedVODDetails(stbUA,Package))
             {
 
-                strResponse += " { \"AssetId\" : \"" + obj.strAssetID + "\"  , \"Action\" : }";
+                strResponse += " { \"AssetId\" : \"" + obj.strAssetID + "\"  , \"Action\" :\"" + obj.strAction + "\", \"Header\" : \"" + obj.strHeaderText + "\" }";
             }
             return strResponse;
         }
