@@ -13,19 +13,13 @@ namespace ChannelSubscription
     public interface IService1
     {
 
-        [OperationContract]
-        string GetData(int value);
 
         [OperationContract]
         string GetQualification(string stbUA);
 
         [OperationContract]
         string OrderData(string stbUA, string Package);
-
-        [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
-
-        // TODO: Add your service operations here
+// TODO: Add your service operations here
     }
 
 
