@@ -1,0 +1,6 @@
+c:\users\administrator\documents\visual studio 2013\Projects\ChannelSubscription\ChannelSubscription\bin\ChannelSubscription.dll.config
+c:\users\administrator\documents\visual studio 2013\Projects\ChannelSubscription\ChannelSubscription\bin\ChannelSubscription.dll
+c:\users\administrator\documents\visual studio 2013\Projects\ChannelSubscription\ChannelSubscription\bin\ChannelSubscription.pdb
+c:\users\administrator\documents\visual studio 2013\Projects\ChannelSubscription\ChannelSubscription\obj\Debug\ChannelSubscription.csprojResolveAssemblyReference.cache
+c:\users\administrator\documents\visual studio 2013\Projects\ChannelSubscription\ChannelSubscription\obj\Debug\ChannelSubscription.dll
+c:\users\administrator\documents\visual studio 2013\Projects\ChannelSubscription\ChannelSubscription\obj\Debug\ChannelSubscription.pdb
