@@ -1,10 +1,2 @@
 language: csharp
 solution: ChannelSubscription.sln
-
-install:
-  - sudo apt-get install nunit-console
-  - nuget restore ChannelSubscription.sln
- 
-script:
-  - xbuild ChannelSubscription.sln
-  - nunit-console ./ChannelSubscription/bin/ChannelSubscription.dll
