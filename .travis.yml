@@ -7,4 +7,4 @@ install:
  
 script:
   - xbuild ChannelSubscription.sln
-  - nunit-console ./ChannelSubscription/bin/Debug/ChannelSubscription.dll
+  - nunit-console ./ChannelSubscription/bin/ChannelSubscription.dll
