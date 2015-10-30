@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
 
 namespace ChannelSubscription
 {
@@ -12,11 +7,6 @@ namespace ChannelSubscription
     [ServiceContract]
     public interface IService1
     {
-
-
-        [OperationContract]
-        string GetQualification(string stbUA);
-
         [OperationContract]
         string OrderData(string stbUA, int Package);
 
@@ -31,9 +21,9 @@ namespace ChannelSubscription
         [DataMember]
         public int Id { get; set; }
         [DataMember]
-        public string IosCusID{get;set;}
+        public string IosCusID { get; set; }
         [DataMember]
         public string AndroidCustID { get; set; }
-            
+
     }
 }
