@@ -42,7 +42,6 @@ namespace ChannelSubscription
             return string.IsNullOrEmpty(strResponse) ? "[[]]" : "[["+strResponse.Substring(0,strResponse.Length-1)+"]]";
         }
 
-        [TestCase]
         public string LogData()
         {
             string result = string.Empty;
