@@ -43,17 +43,14 @@ namespace ChannelSubscription
         }
 
         [TestCase]
-        public string LogData(AppData dataObj)
+        public string LogData()
         {
             string result = string.Empty;
             try
             {
-                List<AppData> objList = new List<AppData>();
+                List<VODDetails> objList = new List<VODDetails>();
 
-                dataObj.Id = 1;
-                dataObj.IosCusID = "dummoyios";
-                dataObj.AndroidCustID = "dummyandroid";
-                objList.Add(dataObj);
+                objList = DAL.FetchData(); 
 
                 #region ElasticSearch --Begin
                 string indexName = "test";
@@ -67,7 +64,7 @@ namespace ChannelSubscription
                     objbulk.Index<object>(i => i
                         .Index(indexName)
                         .Type(typeName)
-                        .Id(value.Id)
+                        .Id(value.strAssetID)
                         .Document(value));
                     client.Bulk(objbulk);
                 }

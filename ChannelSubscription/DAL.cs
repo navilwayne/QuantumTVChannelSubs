@@ -39,14 +39,26 @@ namespace ChannelSubscription
             return lstobj;
         }
 
-        public string FetchData()
+        public static List<VODDetails> FetchData()
         {
+            List<VODDetails> lstobj = new List<VODDetails>();
             using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["ConnString"]))
             {
                 conn.Open();
-               
+                SqlCommand objCommandToExec = new SqlCommand("select  * from VodDetails ", conn);                
+                SqlDataReader objSDR = objCommandToExec.ExecuteReader();
+                while (objSDR.Read())
+                {
+                    VODDetails OBJ = new VODDetails();
+                    OBJ.strAction = objSDR["strAction"].ToString();
+                    OBJ.strAssetID = objSDR["strAssetID"].ToString();
+                    OBJ.strHeaderText = objSDR["strHeaderText"].ToString();
+                    OBJ.AssentName = objSDR["AssetName"].ToString();
+                    lstobj.Add(OBJ);
+                }
             }
-            return "true";
+            return lstobj;
+            
          
         }
     }

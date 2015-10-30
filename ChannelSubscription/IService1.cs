@@ -21,7 +21,7 @@ namespace ChannelSubscription
         string OrderData(string stbUA, int Package);
 
         [OperationContract]
-        string LogData(AppData appData);
+        string LogData();
     }
 
     [DataContract]
