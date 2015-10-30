@@ -1,6 +1,2 @@
 language: csharp
-install:
-  - sudo apt-get install mono-devel mono-gmcs nunit-console
-script:
-  - xbuild ChannelSubscription.sln
-  - nunit-console ChannelSubscription/ChannelSubscription/bin/Debug/ChannelSubscription.dll
+solution: ChannelSubscription.sln
