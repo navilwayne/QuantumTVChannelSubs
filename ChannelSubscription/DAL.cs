@@ -2,7 +2,6 @@
 using System.Data;
 using System.Data.SqlClient;
 
-
 namespace ChannelSubscription
 {
     public class DAL
