@@ -5,32 +5,84 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using Nest;
+using Newtonsoft.Json;
+using NUnit.Framework;
+using NUnit.Core;
+using NUnit.VisualStudio;
+using NUnit.Util;
 
 namespace ChannelSubscription
 {
-    // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service1" in code, svc and config file together.
-    // NOTE: In order to launch WCF Test Client for testing this service, please select Service1.svc or Service1.svc.cs at the Solution Explorer and start debugging.
+
     public class Service1 : IService1
     {
-
-
         public string GetQualification(string stbUA)
         {
             return string.Empty;
         }
 
-        public string OrderData(string stbUA, string Package)
+        public string OrderData(string stbUA, int Package)
         {
             string strResponse = string.Empty;
-            //ProcessOrder
-            //aweseome code
-            
-            foreach (VODDetails obj in DAL.GetTargetedVODDetails(stbUA,Package))
+            try
             {
-
-                strResponse += " { \"AssetId\" : \"" + obj.strAssetID + "\"  , \"Action\" :\"" + obj.strAction + "\", \"Header\" : \"" + obj.strHeaderText + "\" }";
+                foreach (VODDetails obj in DAL.GetTargetedVODDetails(stbUA, Package))
+                {
+                    strResponse += " { \"AssetId\" : \"" + obj.strAssetID + "\"  , \"Action\" :\"" + obj.strAction + "\", \"Header\" : \"" + obj.strHeaderText + "\" } ,";  
+                }
             }
-            return strResponse;
+
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+
+            return string.IsNullOrEmpty(strResponse) ? "[[]]" : "[["+strResponse.Substring(0,strResponse.Length-1)+"]]";
+        }
+
+        [TestCase]
+        public string LogData(AppData dataObj)
+        {
+            string result = string.Empty;
+            try
+            {
+                List<AppData> objList = new List<AppData>();
+
+                dataObj.Id = 1;
+                dataObj.IosCusID = "dummoyios";
+                dataObj.AndroidCustID = "dummyandroid";
+                objList.Add(dataObj);
+
+                #region ElasticSearch --Begin
+                string indexName = "test";
+                string typeName = "test01";
+                var node = new Uri("http://localhost:9200");
+                var settings = new ConnectionSettings(node);
+                var client = new ElasticClient(settings);
+                BulkDescriptor objbulk = new BulkDescriptor();
+                foreach (var value in objList)
+                {
+                    objbulk.Index<object>(i => i
+                        .Index(indexName)
+                        .Type(typeName)
+                        .Id(value.Id)
+                        .Document(value));
+                    client.Bulk(objbulk);
+                }
+
+                result = "Data successfully inserted";
+                #endregion ElasticSearch  --End
+            }
+
+            
+            catch (Exception ex)
+            {
+                result = ex.Message;
+            }
+
+            return result;
         }
     }
 }

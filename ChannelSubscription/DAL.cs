@@ -2,36 +2,52 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Data;
+using System.Data.SqlClient;
+
 
 namespace ChannelSubscription
 {
     public class DAL
     {
-        public static List<VODDetails> GetTargetedVODDetails(string UA, string Package)
+        public static List<VODDetails> GetTargetedVODDetails(string UA, int Package)
         {
             List<VODDetails> lstobj = new List<VODDetails>();
-            VODDetails OBJ = new VODDetails();
-            OBJ.strAction = "LAUNCHFOLDER";
-            OBJ.strAssetID = "21148";
-            OBJ.strHeaderText = "SD";
-            lstobj.Add(OBJ);
-            OBJ = new VODDetails();
-            OBJ.strAction = "LAUNCHFOLDER";
-            OBJ.strAssetID = "34184";
-            OBJ.strHeaderText = "HD";
-            lstobj.Add(OBJ);
-            OBJ = new VODDetails();
-            OBJ.strAction = "LAUNCHFOLDER";
-            OBJ.strAssetID = "12323";
-            OBJ.strHeaderText = "HD";
-            lstobj.Add(OBJ);
-            OBJ = new VODDetails();
-            OBJ.strAction = "LAUNCHFOLDER";
-            OBJ.strAssetID = "5123";
-            OBJ.strHeaderText = "HD";
-            lstobj.Add(OBJ);
+            using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["ConnString"]))
+            {
+                conn.Open();
+                SqlCommand objCommandToExec = new SqlCommand("uspGetRecommendations", conn);
+                objCommandToExec.CommandType = CommandType.StoredProcedure;
+                SqlParameter[] objarray = new SqlParameter[2];
+                SqlParameter objparam = new SqlParameter("@stbUA", SqlDbType.VarChar, 10);
+                objparam.Value = UA;
+                objarray[0] = objparam;
+                objparam = new SqlParameter("@Package", SqlDbType.Int);
+                objparam.Value = Package;
+                objarray[1] = objparam;
+                objCommandToExec.Parameters.AddRange(objarray);
+                SqlDataReader objSDR = objCommandToExec.ExecuteReader();
+                    while (objSDR.Read())
+                    {
+                        VODDetails OBJ = new VODDetails();
+                        OBJ.strAction = objSDR["strAction"].ToString();
+                        OBJ.strAssetID = objSDR["strAssetID"].ToString();
+                        OBJ.strHeaderText = objSDR["strHeaderText"].ToString();
+                        lstobj.Add(OBJ);
+                    }
+            }
             return lstobj;
         }
 
+        public string FetchData()
+        {
+            using (SqlConnection conn = new SqlConnection(System.Configuration.ConfigurationManager.AppSettings["ConnString"]))
+            {
+                conn.Open();
+               
+            }
+            return "true";
+         
+        }
     }
 }
