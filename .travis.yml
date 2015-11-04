@@ -6,5 +6,5 @@ deploy:
    username: navilwayne@gmail.com
    password: Nh!02015
    api: https://api.run.pivotal.io
-   organization:ChannelSubscription
+   organization: ChannelSubscription
    space: development
