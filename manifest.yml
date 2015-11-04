@@ -1,7 +1,7 @@
 applications:
-- name: 
-  path: 
-  memory: 512M
+- name: QuantumTVChannelSubs
+  path: https://github.com/navilwayne/QuantumTVChannelSubs
+  memory: 999M
   instances: 1
   buildpack: https://github.com/cloudfoundry/
 services:
