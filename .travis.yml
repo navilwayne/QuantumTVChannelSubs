@@ -1,7 +1,6 @@
 language: csharp
 solution: ChannelSubscription.sln
-
- deploy:
+deploy:
    edge: true
    provider: cloudfoundry
    username: navilwayne@gmail.com
