@@ -1,10 +1,10 @@
 language: csharp
 solution: ChannelSubscription.sln
-#deploy:
-  # edge: true
-   #provider: cloudfoundry
-   #username: navilwayne@gmail.com
-   #password: Nh!02015
-   #api: https://api.run.pivotal.io
-   #organization:ChannelSubscription
-   #space: development
+deploy:
+   edge: true
+   provider: cloudfoundry
+   username: navilwayne@gmail.com
+   password: Nh!02015
+   api: https://api.run.pivotal.io
+   organization:ChannelSubscription
+   space: development
