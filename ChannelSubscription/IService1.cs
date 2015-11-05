@@ -24,6 +24,8 @@ namespace ChannelSubscription
         public string IosCusID { get; set; }
         [DataMember]
         public string AndroidCustID { get; set; }
+        [DataMember]
+        public string AndroidCustNme { get; set; }
 
     }
 }
